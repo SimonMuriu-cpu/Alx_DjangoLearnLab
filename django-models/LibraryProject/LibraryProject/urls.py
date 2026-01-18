@@ -22,5 +22,5 @@ urlpatterns = [
   path('', views.list_books, name='home'),
     path('admin/', admin.site.urls),
     path('', include('relationship_app.urls')),
-    path('roles/', include('accounts.urls')),
+    
 ]

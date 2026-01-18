@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Admin Dashboard</title>
+</head>
+<body>
+
+<h1>Admin Dashboard</h1>
+<p>Welcome, {{ request.user.username }}.</p>
+<p>You are logged in as an <strong>Admin</strong>.</p>
+
+<h3>Admin Permissions:</h3>
+<ul>
+    <li>Manage users and roles</li>
+    <li>View system-wide data</li>
+    <li>Configure application settings</li>
+</ul>
+
+</body>
+</html>
