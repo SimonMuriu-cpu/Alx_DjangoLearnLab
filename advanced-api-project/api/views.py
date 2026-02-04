@@ -22,7 +22,7 @@ class BookListView(generics.ListAPIView):
   
   # Add filtering capabilities
 
-  filter_backends = [rest_framework.DjangoFilterBackend]
+  filter_backends = [rest_framework.DjangoFilterBackend, filters.OrderingFilter]
   filterset_fields = ['publication_year', 'author']
   
   # search_fields = ['title', 'author_name']
