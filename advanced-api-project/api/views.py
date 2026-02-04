@@ -1,7 +1,8 @@
 from django.shortcuts import render
 
 # Create your views here.
-from rest_framework import generics, permissions
+from rest_framework import generics
+from rest_framework.permissions import IsAuthenticatedOrReadOnly, IsAuthenticated, AllowAny
 from .models import Book
 from .serializers import BookSerializer
 
@@ -17,7 +18,7 @@ class BookListView(generics.ListAPIView):
     """
   queryset = Book.objects.all()
   serializer_class = BookSerializer
-  permission_classes = [permissions.AllowAny]
+  permission_classes = [AllowAny]
   filter_backends = [DjangoFilterBackend, SearchFilter, OrderingFilter]
   filterset_fields = ['publication_year', 'author']
   search_fields = ['title', 'author_name']
@@ -32,7 +33,7 @@ class BookDetailView(generics.RetrieveAPIView):
     """
     queryset = Book.objects.all()
     serializer_class = BookSerializer
-    permission_classes = [permissions.AllowAny]
+    permission_classes = [AllowAny]
 
 
 
@@ -43,7 +44,7 @@ class BookCreateView(generics.CreateAPIView):
     """
   queryset = Book.objects.all()
   serializer_class = BookSerializer
-  permission_classes = [permissions.IsAuthenticated]
+  permission_classes = [IsAuthenticated]
   
   def perform_create(self, serializer):
       serializer.save()
@@ -56,7 +57,7 @@ class BookUpdateView(generics.UpdateAPIView):
     """
   queryset = Book.objects.all()
   serializer_class = BookSerializer
-  permission_classes = [permissions.IsAuthenticated]
+  permission_classes = [IsAuthenticated]
   def perform_update(self, serializer):
       serializer.save()
 
@@ -67,4 +68,4 @@ class BookDeleteView(generics.DestroyAPIView):
     """
   queryset = Book.objects.all()
   serializer_class = BookSerializer
-  permission_classes = [permissions.IsAuthenticated]
+  permission_classes = [IsAuthenticated]
