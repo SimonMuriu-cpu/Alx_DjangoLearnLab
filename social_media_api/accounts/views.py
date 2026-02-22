@@ -9,7 +9,7 @@ from rest_framework.authtoken.models import Token
 from django.contrib.auth import get_user_model
 from .serializers import RegisterSerializer, LoginSerializer, UserSerializer
 
-User = get_user_model()
+CustomUser = get_user_model()
 
 
 class RegisterView(generics.CreateAPIView):
@@ -51,8 +51,8 @@ class FollowUserView(APIView):
 
     def post(self, request, user_id):
         try:
-            user_to_follow = User.objects.get(id=user_id)
-        except User.DoesNotExist:
+            user_to_follow = CustomUser.objects.get(id=user_id)
+        except CustomUser.DoesNotExist:
             return Response({"error": "User not found"}, status=404)
 
         if user_to_follow == request.user:
@@ -68,8 +68,8 @@ class UnfollowUserView(APIView):
 
     def post(self, request, user_id):
         try:
-            user_to_unfollow = User.objects.get(id=user_id)
-        except User.DoesNotExist:
+            user_to_unfollow = CustomUser.objects.get(id=user_id)
+        except CustomUser.DoesNotExist:
             return Response({"error": "User not found"}, status=404)
 
         request.user.following.remove(user_to_unfollow)
